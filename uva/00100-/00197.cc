@@ -1,6 +1,8 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<cstring>
+#include<cstdio>
 using namespace std;
 
 class Piece{
@@ -13,6 +15,7 @@ public:
     d = dd;
     r = rr;
     c = cc;
+    memset(b, 0, sizeof(b));
     for(int i=0;i<d;i++)
       for(int j=0;j<r;j++)
         for(int k=0;k<c;k++)
@@ -20,7 +23,7 @@ public:
   }
 
   void droll(){
-    bool nex[3][3][3];
+    bool nex[3][3][3] = {};
     for(int dd=0;dd<d;dd++)
       for(int rr=0;rr<r;rr++)
         for(int cc=0;cc<c;cc++)
@@ -33,7 +36,7 @@ public:
   }
 
   void rroll(){
-    bool nex[3][3][3];
+    bool nex[3][3][3] = {};
     for(int rr=0;rr<r;rr++)
       for(int dd=0;dd<d;dd++)
         for(int cc=0;cc<c;cc++)
@@ -46,7 +49,7 @@ public:
   }
 
   void croll(){
-    bool nex[3][3][3];
+    bool nex[3][3][3] = {};
     for(int cc=0;cc<c;cc++)
       for(int rr=0;rr<r;rr++)
         for(int dd=0;dd<d;dd++)
@@ -189,8 +192,8 @@ void rec(int id, int d, int r, int c, int used[3][3][3], int order[6]){
     for(int i=0;i<3;i++)
       for(int j=0;j<3;j++)
         for(int k=0;k<3;k++)
-          cout << (char)(used[i][j][k]+'a');
-    cout << endl;
+          printf("%c", used[i][j][k]+'a');
+    printf("\n");
     return;
   }
   if(r==3){
@@ -211,6 +214,9 @@ void rec(int id, int d, int r, int c, int used[3][3][3], int order[6]){
     for(int dd=0;dd+p.d<=3;dd++)
       for(int rr=0;rr+p.r<=3;rr++)
         for(int cc=0;cc+p.c<=3;cc++){
+          if (!(dd<=d && d<dd+p.d && rr<=r && r<rr+p.r && cc<=c && c<cc+p.c))
+            continue;
+          
           bool chk = false;
           for(int ddd=0;ddd<p.d;ddd++)
             for(int rrr=0;rrr<p.r;rrr++)
@@ -277,7 +283,7 @@ void work(){
           rec(0,0,0,0,used,order);
         }
   }while(next_permutation(order,order+6));
-  cout << endl;
+  printf("\n");
 }
 
 int main(){
