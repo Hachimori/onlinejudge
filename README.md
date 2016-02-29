@@ -18,7 +18,7 @@ Solutions for Online Judge
 * 200+ problems solved [Status](http://www.spoj.com/users/hachimori/)
 
 ## pku
-* Peking University Online Judge [Site](acm.pku.edu.cn/JudgeOnline/)
+* Peking University Online Judge [Site](http://acm.pku.edu.cn/JudgeOnline/)
 * 180+ problems solved [Status](http://poj.org/userstatus?user_id=Hachimori)
 
 
