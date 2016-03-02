@@ -1,5 +1,8 @@
 #include<iostream>
 #include<string>
+#include<cstring>
+#include<cstdio>
+using namespace std;
 
 #define WALL -1
 #define CONTINUE 0
