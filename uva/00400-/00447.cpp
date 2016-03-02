@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
-#include<assert.h>
+#include<cassert>
+using namespace std;
 
 #define WALL -1
 #define EMPTY 0
@@ -19,15 +20,9 @@ char matrix[MAX][MAX];
 void output(){
   
   for(int i=1;i<21;i++){
-    for(int j=20;j>=1;j--){
-      if(matrix[i][j]==PEOPLE){
-	for(int k=1;k<=j;k++){
-	  if(matrix[i][k]==PEOPLE) cout << 'O';
-	  else if(matrix[i][k]==EMPTY) cout << ' ';
-	  else assert(false);
-	}
-	break;
-      }
+    for(int j=1;j<21;j++){
+      if(matrix[i][j]==PEOPLE) cout << 'O';
+      else cout << ' ';
     }cout << endl;
   }
   cout << "********************" << endl;
