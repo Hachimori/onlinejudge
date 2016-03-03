@@ -4,6 +4,7 @@
 #include<climits>
 #include<string>
 #include<cstdio>
+using namespace std;
 
 #define MAX 600
 
@@ -60,7 +61,7 @@ class Graph{
 
 };
 
-
+bool first = true;
 int num_node;
 
 void dijkstra(Graph &g, int start){
@@ -174,13 +175,16 @@ class Solver{
       if(str.length()==0) break;
       
       sscanf(str.c_str(),"%d%d",&start,&goal);
-      
+
+      if (!first) {
+          cout << endl;
+      }
+      first = false;
       cout << "From " << start << " to " << goal << " :" << endl;
       
       if(start==goal){
 	cout << "Path: " << start << "-->" << goal << endl;
 	cout << "Total cost : " << 0 << endl;
-	cout << endl;
 	continue;
       }
 
@@ -200,7 +204,6 @@ class Solver{
       }
 
       cout << "Total cost : " << answer_list[start][goal]-g.tax[goal] << endl;
-      cout << endl;
     }
 
     return;
@@ -220,8 +223,7 @@ int main(){
   getline(cin,str);
 
   for(int i=0;i<cases;i++){
-    if(i!=0) cout << endl;
-
+    
     solver.read(g);
     getline(cin,str);
     solver.work(g);
