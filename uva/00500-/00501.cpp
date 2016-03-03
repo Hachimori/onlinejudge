@@ -1,103 +1,63 @@
 #include<iostream>
 #include<vector>
-#include<algorithm>
 #include<queue>
+using namespace std;
+const int ITEM = 30005;
 
-int add_element,get_element;
-int arg,curr_num_element;
-vector<int> sorted_elements;
-queue<int> elements;
-queue<int> gets;
 
-class Solver{
+int nItem, item[ITEM];
+int nOutPos, outPos[ITEM];
 
- public:
-  
-  void init(){
-    
-    curr_num_element = 0;
-    arg = 0;
-    sorted_elements.clear();
-    
-    while(!elements.empty()) elements.pop();
-    while(!gets.empty()) gets.pop(); 
-    
-  }
-
-  void read(){
-    
-    int t;
-
-    cin >> add_element >> get_element;
-
-    for(int i=0;i<add_element;i++){
-      cin >> t;
-      elements.push(t);
+void read() {
+    cin >> nItem >> nOutPos;
+    for (int i = 0; i < nItem; ++i) {
+        cin >> item[i];
     }
     
-    for(int i=0;i<get_element;i++){
-      cin >> t;
-      gets.push(t);
+    for (int i = 0; i < nOutPos; ++i) {
+        cin >> outPos[i];
     }
+}
 
-  }
-  
-  void Get(){
+
+void work() {
+    priority_queue<int, vector<int>, less<int> > LQ;
+    priority_queue<int, vector<int>, greater<int> > RQ;
     
-    sort(sorted_elements.begin(),sorted_elements.end());
-
-    cout << sorted_elements[arg] << endl;
-    
-    arg++;
-    
-    return;
-
-  }
-
-  void Add(int n){
-
-    sorted_elements.push_back(n);
-    
-    curr_num_element++;
-
-  }
-
-  void work(){
-    
-    while(!gets.empty()){
-      // cout << "ok" << endl;
-      if(curr_num_element == gets.front() ){
-	Get();
-	gets.pop(); 
-      }
-      else{ 
-	Add(elements.front());
-	elements.pop();
-      }
-
+    int curOutPos = 0;
+    for (int curItem = 0; curItem < nItem || curOutPos < nOutPos;) {
+        if (curOutPos < nOutPos && curItem == outPos[curOutPos]) {
+            cout << LQ.top() << endl;
+            if (!RQ.empty()) {
+                LQ.push(RQ.top());
+                RQ.pop();
+            }
+            ++curOutPos;
+        }
+        else {
+            if (LQ.size() <= curOutPos) {
+                LQ.push(item[curItem]);
+            }
+            else if (item[curItem] < LQ.top()) {
+                RQ.push(LQ.top());
+                LQ.pop();
+                LQ.push(item[curItem]);
+            }
+            else {
+                RQ.push(item[curItem]);
+            }
+            ++curItem;
+        }
     }
-    
-    return;
+}
 
-  }
 
-};
-
-main(){
-  
-  Solver solver;
-  int cases;
-  
-  cin >> cases;
-
-  for(int i=0;i<cases;i++){
-    
-    if(i!=0) cout << endl;
-    
-    solver.init();
-    solver.read(); 
-    solver.work();
-    
-  }
-
+int main(){
+    int cases;
+    cin >> cases;
+    for (int i = 0; i < cases; ++i) {
+        if (i) cout << endl;
+        read();
+        work();
+    }
 }
