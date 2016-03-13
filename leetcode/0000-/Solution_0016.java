@@ -26,27 +26,27 @@ public class Solution_0016 {
         
         Arrays.sort(nums);
         
-        Set<Integer> aSet = new HashSet<Integer>();
-        
         int ans = Integer.MAX_VALUE / 2;
         
         // pick a
         for (int i = 0; i < nums.length; ++i) {
-            int a = nums[i];
-            if (aSet.contains(a)) {
+            
+            // skip the same number to avoid duplicate
+            if (i - 1 >= 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            aSet.add(a);
+            
+            int a = nums[i];
             
             // pick b
-            Set<Integer> bSet = new HashSet<Integer>();
             for (int j = i + 1; j < nums.length; ++j) {
                 
-                int b = nums[j];
-                if (bSet.contains(b)) {
+                // skip the same number to avoid duplicate
+                if (j - 1 >= i + 1 && nums[j] == nums[j - 1]) {
                     continue;
                 }
-                bSet.add(b);
+                
+                int b = nums[j];
                 
                 // pick c
                 // From the equation a + b + c == target, c = target - a - b
