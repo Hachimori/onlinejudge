@@ -25,7 +25,6 @@ public class Solution_0015 {
         
         Arrays.sort(nums);
         
-        Set<Integer> aSet = new HashSet<Integer>();
         Set<Integer> cSet = new HashSet<Integer>() {{
             for (int num : nums) {
                 add(num);
@@ -37,19 +36,18 @@ public class Solution_0015 {
         // pick a
         for (int i = 0; i < nums.length; ++i) {
             
-            if (aSet.contains(nums[i])) {
+            // skip the same number to avoid duplicate
+            if (i - 1 >= 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            aSet.add(nums[i]);
             
             // pick b
-            Set<Integer> bSet = new HashSet<Integer>();
             for (int j = i + 1; j < nums.length; ++j) {
                 
-                if (bSet.contains(nums[j])) {
+                // skip the same number to avoid duplicate
+                if (j - 1 >= i + 1 && nums[j] == nums[j - 1]) {
                     continue;
                 }
-                bSet.add(nums[j]);
                 
                 // From the equation a + b + c == 0, c = - a - b
                 int target = - nums[i] - nums[j];
