@@ -63,8 +63,8 @@ void work(int cases){
 
 int main(){
     for(int i=0;read();i++){
-            if(i) cout << endl;
             work(i+1);
+            cout << endl;
     }
     
     return 0;    
