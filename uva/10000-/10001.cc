@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstring>
 using namespace std;
 const int BUF = 40;
 
