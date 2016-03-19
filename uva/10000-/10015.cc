@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-#include<cassert>
 
 #define MAX_NUM 1000000
 #define MAX_PEOPLE 3510
@@ -44,32 +43,20 @@ bool read(){
 }
 
 void work(){
-  
+  vector<int> remaining;
   for(int i=0;i<nPeople;i++)
-    visited[i]=false;
+      remaining.push_back(i);
 
   int cursor=0;
-  int nVisited=0;
 
-  for(int i=0;nVisited<nPeople-1;i++){
-    if(i==primeList.size()) assert(false);
+  for(int i=0;i<nPeople-1;i++){
 
-    for(int j=0;;cursor++){      
-      cursor%=nPeople;
-      if(!visited[cursor]) j++;
-
-      if(j==primeList[i]) break;
-    }
-    //cout << cursor << endl;
-    visited[cursor]=true;
-    nVisited++;
-
+    int nSkip = (primeList[i] - 1) % (nPeople - i);
+    cursor = (cursor+nSkip)%remaining.size();
+    remaining.erase(remaining.begin() + cursor);
   }
   
-  for(int i=0;i<nPeople;i++){
-    if(!visited[i]) cout << i+1 << endl;
-  }
-  
+  cout << remaining[0]+1 << endl;
 }
 
 int main(){
