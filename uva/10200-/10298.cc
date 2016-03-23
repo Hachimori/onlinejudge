@@ -1,23 +1,15 @@
-// ad-hoc
+// KMPÇ…ÇÊÇÈé¸ä˙ÇÃåüèo
 //
-// 
-// $BJ8;zNs$r(Ba$BJ,3d$7$F!"J,3d$5$l$?J8;zNs$,A4$FF1$8$J$i$P!"(B
-// $B85$NJ8;zNs(B = $BJ,3d$5$l$?J8;zNs(B^a$B$H$$$&$3$H$,8@$($k!#(B  
-//
-// $B99$K!"J,3d$5$l$?J8;zNs$r(Bb$BJ,3d$7$F!"$5$i$KJ,3d$5$l$?J8;zNs$,A4$FF1$8$J$i$P!"(B
-// $BJ,3d$5$l$?J8;zNs(B = $B$5$i$KJ,3d$5$l$?J8;zNs(B^b
-// $B85$NJ8;zNs(B = ($B$5$i$KJ,3d$5$l$?J8;zNs(B^b)^a
-// $B$,$$$($k!#(B
+// è⁄ÇµÇ≠ÇÕ ~/library/other/kmpCycleDetect.cc
 
 #include<iostream>
-#include<cstring>
 #include<cstdio>
 
-#define MAX_BUF 2000005
+#define MAX_SIZE 1000005
 
 using namespace std;
 
-char str[MAX_BUF];
+char str[MAX_SIZE];
 
 bool read(){
   scanf("%s",str);
@@ -26,22 +18,15 @@ bool read(){
 }
 
 void work(){
-  int curr = strlen(str), remain = strlen(str);
+  int N = strlen(str);
+  static int next[MAX_SIZE];
   
-  for(int i=2;i<=curr;i++){
-    while(curr%i==0){
-      curr /= i;
-      
-      char *j;
-      for(j=str;j-str<remain-remain/i;j++)
-	if(*j!=*(j+remain/i)) break;
-      
-      if(j-str==remain-remain/i) remain /= i;
-      else break;
-    }
-  }
-  
-  cout << strlen(str)/remain << endl;
+  next[0] = -1;
+  for(int i=0,j=-1;i<N;i++,j++,next[i]=j)
+    while(j>=0 && str[i]!=str[j]) j = next[j];
+
+  if(next[N]!=0 && N%(N-next[N])==0) cout << N/(N-next[N]) << endl;
+  else cout << 1 << endl;
 }
 
 int main(){
