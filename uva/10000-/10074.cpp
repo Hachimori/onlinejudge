@@ -2,6 +2,7 @@
 #include<string>
 
 #define MAX 100
+using namespace std;
 
 int num_row,num_column;
 int max_piece;
