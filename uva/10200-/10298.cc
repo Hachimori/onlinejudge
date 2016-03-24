@@ -1,10 +1,10 @@
-// KMP‚É‚æ‚éüŠú‚ÌŒŸo
+// KMPÉ‚æ‚©ò‚ŒŒo
 //
-// Ú‚µ‚­‚Í ~/library/other/kmpCycleDetect.cc
+// Ú‚Í ~/library/other/kmpCycleDetect.cc
 
 #include<iostream>
 #include<cstdio>
-
+#include<cstring>
 #define MAX_SIZE 1000005
 
 using namespace std;
