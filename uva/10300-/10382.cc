@@ -58,8 +58,7 @@ void work(){
 
   }
 
-  if (!segmentList.empty())
-      sort(segmentList.begin(),segmentList.end(),compare);
+  sort(segmentList.begin(),segmentList.end(),compare);
 
   /*
   for(int i=0;i<segmentList.size();i++){
@@ -107,5 +106,5 @@ int main(){
   while(read())
     work();
 
-  return true;
+  return 0;
 }
